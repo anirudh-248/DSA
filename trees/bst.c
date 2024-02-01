@@ -46,6 +46,43 @@ void insert() {
     printf("item %d inserted\n",temp->data);
 }
 
+void delete() {
+    if (root==NULL) {
+        printf("tree empty\n");
+    }
+    else {
+        int val;
+        printf("Enter the data item: ");
+        scanf("%d",&val);
+        node *temp = root;
+        node *parent = NULL;
+        while (temp!=NULL) {
+            if (temp->data==val) {
+                if (parent==NULL) {
+                    root = NULL;
+                }
+                else if (parent->left==temp) {
+                    parent->left = NULL;
+                }
+                else {
+                    parent->right = NULL;
+                }
+                printf("item %d deleted\n",temp->data);
+                free(temp);
+                break;
+            }
+            else if (val < temp->data) {
+                parent = temp;
+                temp = temp->left;
+            }
+            else {
+                parent = temp;
+                temp = temp->right;
+            }
+        }
+    }
+}
+
 void display(node *temp) {
     if (root==NULL) {
         printf("tree empty\n");
@@ -61,14 +98,15 @@ void display(node *temp) {
 
 void main() {
     int ch;
-    printf("1.insert  2.display  3.exit\n");
+    printf("1.insert  2.delete  3.display  4.exit\n");
     while (1) {
         printf("Enter choice: ");
         scanf("%d",&ch);
         switch (ch) {
             case 1: insert(); break;
-            case 2: display(root); printf("\n"); break;
-            case 3: printf("goodbye\n"); exit(0);
+            case 2: delete(); break;
+            case 3: display(root); printf("\n"); break;
+            case 4: printf("goodbye\n"); exit(0);
             default: printf("invalid choice");
         }
     }
