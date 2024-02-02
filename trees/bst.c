@@ -84,16 +84,11 @@ void delete() {
 }
 
 void display(node *temp) {
-    if (root==NULL) {
-        printf("tree empty\n");
-        return;
+    if (temp!=NULL) {
+        display(temp->left);
+        printf("%d\t",temp->data);
+        display(temp->right);
     }
-    if (temp==NULL) {
-        return;
-    }
-    display(temp->left);
-    printf("%d\t",temp->data);
-    display(temp->right);
 }
 
 void main() {
