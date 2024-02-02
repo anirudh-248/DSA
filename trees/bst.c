@@ -107,7 +107,7 @@ void main() {
             case 2: delete(); break;
             case 3: display(root); printf("\n"); break;
             case 4: printf("goodbye\n"); exit(0);
-            default: printf("invalid choice");
+            default: printf("invalid choice\n");
         }
     }
 }
