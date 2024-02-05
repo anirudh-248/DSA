@@ -68,20 +68,13 @@ void create_n_nodes() {
 
 void display() {
     int ct=0;
-    if (start==NULL) {
-        printf("List empty\n");
-    }
-    else {
-        dll *temp = start;
-        while (temp->next!=NULL) {
-            printf("\nName: %s\nSSN: %s\nDept: %s\nDesg: %s\nSalary: %.2f\nPhone number: %d\n",temp->name,temp->ssn,temp->dept,temp->desg,temp->sal,temp->phno);
-            temp = temp->next;
-            ct++;
-        }
-        ct++;
+    struct node *temp = start;
+    while (temp!=NULL) {
         printf("\nName: %s\nSSN: %s\nDept: %s\nDesg: %s\nSalary: %.2f\nPhone number: %d\n",temp->name,temp->ssn,temp->dept,temp->desg,temp->sal,temp->phno);
-        printf("\nTotal no of nodes: %d\n",ct);
+        ct++;
+        temp = temp->next;
     }
+    printf("Total no of nodes: %d\n",ct);
 }
 
 void del_end() {
