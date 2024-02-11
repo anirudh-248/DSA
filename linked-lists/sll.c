@@ -22,8 +22,7 @@ struct node *start = NULL;
 struct node *create() {
     struct node *temp;
     temp = (struct node *)malloc(sizeof(struct node));
-    printf("\n");
-    printf("Enter name: ");
+    printf("\nEnter name: ");
     scanf("%s",temp->name);
     printf("Enter USN: ");
     scanf("%s",temp->usn);
@@ -33,7 +32,6 @@ struct node *create() {
     scanf("%d",&temp->sem);
     printf("Enter phone number: ");
     scanf("%s",temp->phno);
-    printf("\n");
     temp->next = NULL;
     return temp;
 }
@@ -58,34 +56,20 @@ void create_n_nodes() {
     }
 }
 
-void display() {
-    if (start==NULL) {
-        printf("List empty\n");
-    }
-    else {
-        struct node *temp = start;
-        while (temp->next!=NULL) {
-            printf("\nName: %s\nUSN: %s\nProgramme: %s\nSemester: %d\nPhone number: %s\n",temp->name,temp->usn,temp->prg,temp->sem,temp->phno);
-            temp = temp->next;
-        }
-        printf("\nName: %s\nUSN: %s\nProgramme: %s\nSemester: %d\nPhone number: %s\n",temp->name,temp->usn,temp->prg,temp->sem,temp->phno);
-    }
+void display(struct node *temp) {
+    if (temp==NULL) return;
+    printf("\nName: %s\nUSN: %s\nProgramme: %s\nSemester: %d\nPhone number: %s\n",temp->name,temp->usn,temp->prg,temp->sem,temp->phno);
+    display(temp->next);
 }
 
 void count_nodes() {
-    int n=0;
-    if (start==NULL) {
-        n = 0;
+    int ct = 0;
+    struct node *temp = start;
+    while (temp!=NULL) {
+        ct++;
+        temp = temp->next;
     }
-    else {
-        struct node *temp = start;
-        while (temp->next!=NULL) {
-            n++;
-            temp = temp->next;
-        }
-        n++;
-    }
-    printf("Total no of nodes: %d\n",n);
+    printf("\nTotal no of nodes: %d\n",ct);
 }
 
 void reverse() {
@@ -97,7 +81,8 @@ void reverse() {
         current = next;
     }
     start = prev;
-    display();
+    printf("New list:\n");
+    display(start);
 }
 
 void ins_end() {
@@ -153,8 +138,8 @@ void main()
     int ch;
     create_n_nodes();
     printf("\nSTUDENT DETAILS:\n");
-    display();
-    printf("\nList operations:\n1.insert end  2.delete end  3.insert front  4.delete front  5.display  6.count nodes  7.reverse  8.exit\n");
+    display(start);
+    printf("\nList operations:\n1.insert end  2.delete end  3.insert front  4.delete front  5.display  6.reverse  7.count nodes  8.exit\n");
     while (1) {
         printf("Enter choice: ");
         scanf("%d",&ch);
@@ -163,9 +148,9 @@ void main()
             case 2: del_end(); break;
             case 3: ins_front(); break;
             case 4: del_front(); break;
-            case 5: display(); break;
-            case 6: count_nodes(); break;
-            case 7: reverse(); break;
+            case 5: display(start); break;
+            case 6: reverse(); break;
+            case 7: count_nodes(); break;
             case 8: printf("goodbye\n"); exit(0);
             default: printf("invalid choice\n");
         }
