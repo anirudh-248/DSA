@@ -88,6 +88,18 @@ void count_nodes() {
     printf("Total no of nodes: %d\n",n);
 }
 
+void reverse() {
+    struct node *prev = NULL, *current = start, *next;
+    while (current!=NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    start = prev;
+    display();
+}
+
 void ins_end() {
     struct node *temp = create();
     if (start==NULL) {
@@ -142,7 +154,7 @@ void main()
     create_n_nodes();
     printf("\nSTUDENT DETAILS:\n");
     display();
-    printf("\nList operations:\n1.insert end  2.delete end  3.insert front  4.delete front  5.display  6.count nodes  7.exit\n");
+    printf("\nList operations:\n1.insert end  2.delete end  3.insert front  4.delete front  5.display  6.count nodes  7.reverse  8.exit\n");
     while (1) {
         printf("Enter choice: ");
         scanf("%d",&ch);
@@ -153,7 +165,8 @@ void main()
             case 4: del_front(); break;
             case 5: display(); break;
             case 6: count_nodes(); break;
-            case 7: printf("goodbye\n"); exit(0);
+            case 7: reverse(); break;
+            case 8: printf("goodbye\n"); exit(0);
             default: printf("invalid choice\n");
         }
     }
