@@ -104,6 +104,7 @@ void del_end() {
         printf("List empty\n");
     }
     else if (start->next==NULL) {
+        printf("USN %s removed from end\n",start->usn);
         free(start);
         start = NULL;
     }
@@ -114,6 +115,7 @@ void del_end() {
             temp = temp->next;
         }
         prev->next = NULL;
+        printf("USN %s removed from end\n",temp->usn);
         free(temp);
     }
 }
@@ -123,12 +125,14 @@ void del_front() {
         printf("List empty\n");
     }
     else if (start->next==NULL) {
+        printf("USN %s removed from front\n",start->usn);
         free(start);
         start = NULL;
     }
     else {
         struct node *temp = start;
         start = temp->next;
+        printf("USN %s removed from front\n",temp->usn);
         free(temp);
     }
 }
