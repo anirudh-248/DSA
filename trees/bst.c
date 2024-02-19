@@ -86,8 +86,8 @@ void delete() {
 void display(node *temp) {
     if (temp!=NULL) {
         display(temp->left);
-        printf("%d\t",temp->data);
         display(temp->right);
+        printf("%d\t",temp->data);
     }
 }
 
