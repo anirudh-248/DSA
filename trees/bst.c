@@ -46,41 +46,43 @@ void insert() {
     printf("item %d inserted\n",temp->data);
 }
 
-void delete() {
-    if (root==NULL) {
-        printf("tree empty\n");
-    }
+int findmin(node *root) {
+    if (root==NULL) return -1;
+    if (root->left!=NULL)
+        return findmin(root->left);
+    return root->data;
+}
+
+node *delete(node *root, int data) {
+    node *temp;
+    int min;
+    if (root==NULL) return NULL;
+    if (data < root->data) 
+        root->left = delete(root->left,data);
+    else if (data > root->data)
+        root->right = delete(root->right,data);
     else {
-        int val;
-        printf("Enter the data item: ");
-        scanf("%d",&val);
-        node *temp = root;
-        node *parent = NULL;
-        while (temp!=NULL) {
-            if (temp->data==val) {
-                if (parent==NULL) {
-                    root = NULL;
-                }
-                else if (parent->left==temp) {
-                    parent->left = NULL;
-                }
-                else {
-                    parent->right = NULL;
-                }
-                printf("item %d deleted\n",temp->data);
-                free(temp);
-                break;
-            }
-            else if (val < temp->data) {
-                parent = temp;
-                temp = temp->left;
-            }
-            else {
-                parent = temp;
-                temp = temp->right;
-            }
+        if (root->left==NULL && root->right==NULL) {
+            free(root);
+            root = NULL;
+        }
+        else if (root->left==NULL) {
+            temp = root;
+            root = root->right;
+            free(temp);
+        }
+        else if (root->right==NULL) {
+            temp = root;
+            root = root->left;
+            free(temp);
+        }
+        else {
+            min = findmin(root->right);
+            root->data = min;
+            root->right = delete(root->right,min);
         }
     }
+    return root;
 }
 
 void display(node *temp) {
@@ -92,14 +94,18 @@ void display(node *temp) {
 }
 
 void main() {
-    int ch;
+    int ch,data;
     printf("1.insert  2.delete  3.display  4.exit\n");
     while (1) {
         printf("Enter choice: ");
         scanf("%d",&ch);
         switch (ch) {
             case 1: insert(); break;
-            case 2: delete(); break;
+            case 2:
+                printf("Enter data item: ");
+                scanf("%d",&data);
+                root = delete(root, data);
+                break;
             case 3: display(root); printf("\n"); break;
             case 4: printf("goodbye\n"); exit(0);
             default: printf("invalid choice\n");
