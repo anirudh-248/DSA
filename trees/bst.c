@@ -85,12 +85,34 @@ node *delete(node *root, int data) {
     return root;
 }
 
+void inorder(node *temp) {
+    if (temp==NULL) return;
+    inorder(temp->left);
+    printf("%d\t",temp->data);
+    inorder(temp->right);
+} 
+
+void preorder(node *temp) {
+    if (temp==NULL) return;
+    printf("%d\t",temp->data);
+    preorder(temp->left);
+    preorder(temp->right);
+}
+
+void postorder(node *temp) {
+    if (temp==NULL) return;
+    postorder(temp->left);
+    postorder(temp->right);
+    printf("%d\t",temp->data);
+}
+
 void display(node *temp) {
-    if (temp!=NULL) {
-        display(temp->left);
-        display(temp->right);
-        printf("%d\t",temp->data);
-    }
+    printf("Inorder:\n");
+    inorder(root);
+    printf("\nPreorder:\n");
+    preorder(root);
+    printf("\nPostorder:\n");
+    postorder(root);
 }
 
 void main() {
