@@ -46,21 +46,21 @@ void insert() {
     printf("item %d inserted\n",temp->data);
 }
 
-int findmin(node *root) {
-    if (root==NULL) return -1;
-    if (root->left!=NULL)
-        return findmin(root->left);
-    return root->data;
+int findmin(node *temp) {
+    if (temp==NULL) return -1;
+    if (temp->left!=NULL)
+        return findmin(temp->left);
+    return temp->data;
 }
 
 node *delete(node *root, int data) {
     node *temp;
     int min;
     if (root==NULL) return NULL;
-    if (data < root->data) 
-        root->left = delete(root->left,data);
+    if (data < root->data)
+        root->left = delete(root->left, data);
     else if (data > root->data)
-        root->right = delete(root->right,data);
+        root->right = delete(root->right, data);
     else {
         if (root->left==NULL && root->right==NULL) {
             free(root);
@@ -79,7 +79,7 @@ node *delete(node *root, int data) {
         else {
             min = findmin(root->right);
             root->data = min;
-            root->right = delete(root->right,min);
+            root->right = delete(root->right, min);
         }
     }
     return root;
