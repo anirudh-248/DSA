@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+void main() {
     int a[25],i,j,n,temp,e;
     printf("Enter the no of elems in the array: ");
     scanf("%d",&n);
