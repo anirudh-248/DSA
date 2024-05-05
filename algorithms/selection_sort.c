@@ -20,9 +20,9 @@ void main() {
             }
         }
         if (min!=i) {
-            temp = a[min];
-            a[min] = a[i];
-            a[i] = temp;
+            temp = a[i];
+            a[i] = a[min];
+            a[min] = temp;
         }
     }
     printf("\nArray after sorting:\n");
