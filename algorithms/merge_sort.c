@@ -44,9 +44,8 @@ void main() {
     for (int i=0; i<n; i++) {
         printf("%d ",a[i]);
     }
-    printf("\n");
     mergesort(a,0,n-1);
-    printf("Sorted array: ");
+    printf("\nSorted array: ");
     for (int i = 0; i < n; i++) {
         printf("%d ", a[i]);
     }
