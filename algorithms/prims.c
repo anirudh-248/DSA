@@ -21,7 +21,7 @@ void prim() {
             }
         }
         //Include nearest neighbour 'b' into MST
-        printf("Edge from vertex %d to vertex %d and the cost %d\n",a,b,min);
+        printf("Edge from vertex %d to vertex %d and the cost %d\n",a+1,b+1,min);
         vt[b] = 1;
         ne++;
         mincost += min;

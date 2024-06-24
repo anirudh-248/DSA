@@ -23,7 +23,7 @@ void kruskal() {
         while(par[v]!=-1)
             v=par[v];
         if(u!=v) {
-            printf("From vertex %d to vertex %d and the cost = %d\n",a,b,min);
+            printf("From vertex %d to vertex %d and the cost = %d\n",a+1,b+1,min);
             mincost+=min;
             par[v]=u;
             ne++;
