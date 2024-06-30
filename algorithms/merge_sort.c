@@ -1,5 +1,9 @@
 #include <stdio.h>
-int c[10];
+#include <stdlib.h>
+#include <time.h>
+clock_t start, end;
+int c[100000];
+
 void merge(int a[], int low, int mid, int high) {
     int i = low;
     int j = mid+1;
@@ -33,21 +37,24 @@ void mergesort(int a[], int low, int high) {
 }
 
 void main() {
-    int n,a[10];
+    int n,i,a[100000];
     printf("Enter the no of elems: ");
     scanf("%d",&n);
-    printf("Enter the elems: ");
-    for (int i=0; i<n; i++) {
-        scanf("%d",&a[i]);
+    srand(time(0));
+    for (i=0; i<n; i++) {
+        a[i] = rand()%100;
     }
-    printf("Unsorted array: ");
-    for (int i=0; i<n; i++) {
+    printf("Original array: ");
+    for (i=0; i<n; i++) {
         printf("%d ",a[i]);
     }
+    start = clock();
     mergesort(a,0,n-1);
+    end = clock();
     printf("\nSorted array: ");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", a[i]);
+    for (i=0; i<n; i++) {
+        printf("%d ",a[i]);
     }
-    printf("\n");
+    float dur = (float)(end-start)/CLOCKS_PER_SEC;
+    printf("\nTime taken: %f\n",dur);
 }
