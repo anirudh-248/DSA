@@ -1,37 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-clock_t start, end;
-int c[100000];
+int c[100000], ct=0;
 
 void merge(int a[], int low, int mid, int high) {
-    int i = low;
-    int j = mid+1;
-    int k = 0;
+    int i=low,j=mid+1,k=0;
     while (i<=mid && j<=high) {
-        if (a[i] < a[j]) {
+        ct++;
+        if (a[i] < a[j])
             c[k++] = a[i++];
-        } else {
+        else
             c[k++] = a[j++];
-        }
     }
-    while (i<=mid) {
+    while (i<=mid)
         c[k++] = a[i++];
-    }
-    while (j<=high) {
+    while (j<=high)
         c[k++] = a[j++];
-    }
     k = 0;
-    for (i = low; i <= high; i++) {
+    for (i=low; i<=high; i++)
         a[i] = c[k++];
-    }
 }
 
-void mergesort(int a[], int low, int high) {
+void merge_sort(int a[], int low, int high) {
     if (low < high) {
         int mid = (low+high)/2;
-        mergesort(a,low,mid);
-        mergesort(a,mid+1,high);
+        merge_sort(a, low, mid);
+        merge_sort(a, mid+1, high);
         merge(a, low, mid, high);
     }
 }
@@ -48,13 +42,10 @@ void main() {
     for (i=0; i<n; i++) {
         printf("%d ",a[i]);
     }
-    start = clock();
-    mergesort(a,0,n-1);
-    end = clock();
+    merge_sort(a,0,n-1);
     printf("\nSorted array: ");
     for (i=0; i<n; i++) {
         printf("%d ",a[i]);
     }
-    float dur = (float)(end-start)/CLOCKS_PER_SEC;
-    printf("\nTime taken: %f\n",dur);
+    printf("\nNo of comparisons: %d\n",ct);
 }

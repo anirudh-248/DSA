@@ -1,41 +1,38 @@
-#include<stdio.h>
-int cost[10][10],n;
+#include <stdio.h>
+int c[10][10], n;
 
-void prim() {
-    int vt[10]={0};
-    int a=0, b=0, min, mincost = 0, ne = 0;
-    //start from the first vertex
+void prims() {
+    int vt[10] = {0};
+    int a=0, b=0, min, mincost=0, ne=0, i, j;
     vt[0] = 1;
-    while(ne < n-1) {
-        //Find the nearest neighbour
+    while (ne < n-1) {
         min = 999;
-        for (int i=0; i<n; i++) {
-            if(vt[i]==1) {
-                for(int j=0; j<n; j++) {
-                    if(cost[i][j] < min && vt[j]==0) {
-                        min = cost[i][j];
+        for (i=0; i<n; i++) {
+            if (vt[i]==1) {
+                for (j=0; j<n; j++) {
+                    if (c[i][j] < min && vt[j]==0) {
+                        min = c[i][j];
                         a = i;
                         b = j;
                     }
                 }
             }
         }
-        //Include nearest neighbour 'b' into MST
-        printf("Edge from vertex %d to vertex %d and the cost %d\n",a+1,b+1,min);
+        printf("Edge from vertex %d to %d with cost = %d\n",a,b,min);
         vt[b] = 1;
-        ne++;
         mincost += min;
-        cost[a][b] = cost[b][a] = 999;
+        c[a][b] = c[b][a] = 999;
+        ne++;
     }
-    printf("minimum spanning tree cost is %d",mincost);
+    printf("Cost of MST: %d\n",mincost);
 }
 
 void main() {
-    printf("Enter the no. of vertices: ");
+    printf("Enter the no of vertices: ");
     scanf("%d",&n);
-    printf("Enter the cost matrix\n");
-    for(int i=0;i<n;i++)
-        for(int j=0;j<n;j++)
-            scanf("%d",&cost[i][j]);
-    prim();
+    printf("Enter the cost matrix:\n");
+    for (int i=0; i<n; i++)
+        for (int j=0; j<n; j++)
+            scanf("%d",&c[i][j]);
+    prims(); 
 }

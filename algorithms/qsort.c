@@ -1,24 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+int ct = 0;
+
 int partition(int a[], int low, int high) {
-    int p,i,j,temp;
-    p = a[low];
-    i = low + 1;
-    j = high;
+    int p=a[low], i=low+1, j=high, temp;
     while (1) {
-        while (p>=a[i] && i<high) {
-            i++;
-        }
-        while (p<=a[j] && j>low) {
-            j--;
-        }
+        while (p>=a[i] && i<high)
+            i++; ct++;
+        while (p<=a[j] && j>low)
+            j--; ct++;
         if (i<j) {
             temp = a[i];
             a[i] = a[j];
             a[j] = temp;
-        }
-        else {
+        } else {
             temp = a[low];
             a[low] = a[j];
             a[j] = temp;
@@ -29,14 +25,13 @@ int partition(int a[], int low, int high) {
 
 void quick_sort(int a[], int low, int high) {
     if (low < high) {
-        int k = partition(a,low,high);
-        quick_sort(a,low,k-1);
-        quick_sort(a,k+1,high);
+        int k = partition(a, low, high);
+        quick_sort(a, low, k-1);
+        quick_sort(a, k+1, high);
     }
 }
 
 void main() {
-    clock_t start, end;
     int n,i,a[100000];
     printf("Enter the no of elems: ");
     scanf("%d",&n);
@@ -48,13 +43,11 @@ void main() {
     for (i=0; i<n; i++) {
         printf("%d ",a[i]);
     }
-    start = clock();
+    ct = 0;
     quick_sort(a,0,n-1);
-    end = clock();
     printf("\nSorted array: ");
     for (i=0; i<n; i++) {
         printf("%d ",a[i]);
     }
-    float dur = (float)(end-start)/CLOCKS_PER_SEC;
-    printf("\nTime taken: %f\n",dur);
+    printf("\nNo of comparisons: %d\n",ct);
 }
