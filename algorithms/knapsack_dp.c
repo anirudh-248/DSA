@@ -10,7 +10,7 @@ void knapsack_dp() {
     for (i=0; i<=n; i++) {
         for (j=0; j<=m; j++) {
             if (i==0 || j==0)
-                v[i][j] == 0;
+                v[i][j] = 0;
             else if (j<w[i])
                 v[i][j] = v[i-1][j];
             else
@@ -30,19 +30,18 @@ void knapsack_dp() {
         }
         n--;
     }
-    printf("\n");
 }
 
 void main() {
     printf("Enter the no of items: ");
     scanf("%d",&n);
-    printf("Enter the capacity of the knapsack: ");
-    scanf("%d",&m);
     printf("Enter the weights of the items: ");
     for (int i=1; i<=n; i++)
         scanf("%d",&w[i]);
     printf("Enter the profits of the items: ");
     for (int i=1; i<=n; i++)
         scanf("%d",&p[i]);
+    printf("Enter the capacity of the knapsack: ");
+    scanf("%d",&m);
     knapsack_dp();
 }
