@@ -1,24 +1,20 @@
 #include <stdio.h>
-#include <stdlib.h>
 void main() {
-    int n, A[50][50], i, j, k;
+    int n,t[10][10],i,j,k;
     printf("Enter the no of vertices: ");
     scanf("%d",&n);
-    printf("Enter the adj matrix:\n");
+    printf("Enter the adjacency matrix:\n");
     for (i=0; i<n; i++)
         for (j=0; j<n; j++)
-            scanf("%d",&A[i][j]);
+            scanf("%d",&t[i][j]);
     for (k=0; k<n; k++)
         for (i=0; i<n; i++)
             for (j=0; j<n; j++)
-                A[i][j] = A[i][j] || (A[i][k] && A[k][j]);
+                t[i][j] = t[i][j] || (t[i][k] && t[k][j]);
+    printf("Transitive closure:\n");
     for (i=0; i<n; i++) {
-        for (j=0; j<n; j++) {
-            if (A[i][j]==0) {
-                printf("\nGraph is not connected\n");
-                exit(0);
-            }
-        }
+        for (j=0; j<n; j++)
+            printf("%d\t",t[i][j]);
+        printf("\n");
     }
-    printf("\nGraph is connected\n");
 }
